@@ -1,0 +1,43 @@
+---
+# tasks file for ansible-role-oiofs
+
+- name: 'oiofs: Install packages'
+  package:
+    name: "{{ item }}"
+    state: installed
+  with_items: "{{ openio_oiofs_packages }}"
+
+- name: 'oiofs: Ensure OpenIO configuration directory exists'
+  file:
+    path: "{{ openio_oiofs_conf_directory }}"
+    owner: root
+    group: root
+    state: directory
+    mode: 0750
+
+- name: 'oiofs: Ensure OpenIO oiofs cache directory exists'
+  file:
+    path: "{{ openio_oiofs_cache_directory }}"
+    owner: root
+    group: root
+    state: directory
+    mode: 0750
+
+- name: 'oiofs: Set global configuration'
+  template:
+    src: "{{ openio_oiofs_conf_template }}"
+    dest: "{{ openio_oiofs_conf_directory }}/{{ openio_oiofs_conf_filename }}"
+    owner: root
+    group: root
+    mode: 0644
+
+- name: 'oiofs: Set per-namespace configuration'
+  blockinfile:
+    create: yes
+    dest: "{{ openio_oiofs_conf_directory }}/{{ item.name }}"
+    block: |
+      [{{ item.name }}]
+      proxy={{ item.ip }}:{{ item.port }}
+  with_items: "{{ openio_oiofs_ns_oioproxies }}"
+
+...
