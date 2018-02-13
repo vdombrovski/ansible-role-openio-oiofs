@@ -17,7 +17,7 @@
 
 - name: 'oiofs: Ensure OpenIO oiofs cache directory exists'
   file:
-    path: "{{ openio_oiofs_cache_directory }}"
+    path: "{{ openio_oiofs_conf_cache_directory }}"
     owner: root
     group: root
     state: directory
