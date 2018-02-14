@@ -1,0 +1,43 @@
+---
+mountpoints:
+  - path: "/mnt/test",
+    state: present  # (absent)
+    fuse_conf:
+        fuse_opt1: 1
+        fuse_opt2: 2
+    fs_conf:
+        ns: OPENIO
+        account: test
+        container: test
+        cache_directory: 1
+        cache_size: 2
+        #...
+    fs_conf_target: /etc/oio/fs/mnt_test.json
+    sds_conf:
+        # For deployments made on machines that don't have SDS
+        # Contains this:
+        # [OPENIO]
+        # conscience=10.0.1.86:6000
+        # zookeeper=10.0.1.86:6005,10.0.1.88:6005,10.0.1.111:6005
+        # proxy=10.0.1.92:6006
+        # event-agent=beanstalk://10.0.1.92:6014
+        # meta1_digits=3
+        # udp_allowed=yes
+        # ns.storage_policy=THREECOPIES
+        # ns.chunk_size=10485760
+        # ns.service_update_policy=meta2=KEEP|3|1|;rdir=KEEP|1|1|user_is_a_service=rawx;sqlx=KEEP|3|1|;
+        # OR V
+    sds_conf_target: /etc/oio/sds.conf.d
+
+  - path: "/mnt/anotherone",
+    fuse_conf:
+        fuse_opt1: 1
+        fuse_opt2: 2
+    fs_conf:
+        ns: OPENIO
+        account: test
+        container: test2
+        cache_directory: 1
+        cache_size: 2
+        #...
+    fs_conf_target: /etc/oio/fs/mnt_test.json

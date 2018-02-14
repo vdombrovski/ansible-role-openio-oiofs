@@ -1,0 +1,9 @@
+---
+# The playbook installs oiofs and configures mountpoints
+
+- name: Deploy oiofs
+  hosts: all
+  become: true
+
+  roles:
+    - ansible-role-openio-oiofs

@@ -1,0 +1,7 @@
+---
+# Common install instructions
+- name: 'oiofs: Install packages'
+  package:
+    name: "{{ item }}"
+    state: installed
+  with_items: "{{ openio_oiofs_packages }}"

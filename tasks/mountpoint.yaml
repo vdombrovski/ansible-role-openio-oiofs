@@ -1,0 +1,20 @@
+# Per-mountpoint tasks
+---
+
+- name: 'oiofs: Ensure SDS configuration'
+
+- name: 'oiofs: Ensure cache'
+
+- name: 'oiofs: Ensure filesystem'
+
+- name: 'oiofs: Update fuse opts'
+# Handler on change > mount/remount filesystem
+
+- name: 'oiofs: Update FS configuration'
+# Handler on change > mount/remount filesystem
+
+- name: 'oiofs: Unmount filesystem'
+# Handler > umount filesystem
+if state = absent
+
+===
